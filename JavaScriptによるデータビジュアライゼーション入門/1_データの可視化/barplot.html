@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="chart" style="width:600px;height:300px;"></div>
+        <script src="js/flotr2.min.js">
+                    </script>
+        <script>
+            var wins2 = [[[0,28]],[[1,28]],[[2,21]],[[3,20]],[[4,19]]];
+            var teams = [
+                [0,"MCI"],
+                [1,"MUN"],
+                [2,"ARS"],
+                [3,"TOT"],
+                [4,"NEW"]
+            ];
+
+            window.onload = function() {
+                Flotr.draw(
+                    document.getElementById("chart"),wins2,{
+                        title: "Premier League Wins (2011-2012)",
+                        colors: ["#89AFD2","#1D1D1D","#DF021D","#0E204B","#E67840"],
+                        bars: {
+                            show: true,
+                            barWidth: 0.5,
+                            shadowSize: 0,
+                            fillOpacity: 1,
+                            lineWidth: 0
+                        },
+                        yaxis: {
+                            min: 0,
+                            tickDecimals: 0
+                        },
+                        xaxis: {
+                            ticks: teams
+                        },
+                        grid : {
+                            horizontalLines: false,
+                            verticalLines: false
+                        }
+                    });
+                }
+        </script>
+    </body>
+</html>

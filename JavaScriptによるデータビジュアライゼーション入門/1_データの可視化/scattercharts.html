@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="chart" style="width: 600px; height: 300px"></div>
+    <script src="js/flotr2.min.js"></script>
+    <script>
+      /*var health_data = [
+        { country: "Australia", spneding: 9.1, life: 81.8 },
+        { country: "Austria", spneding: 11.0, life: 80.7 },
+        { country: "Belgium", spneding: 10.5, life: 80.3 },
+      ];
+      
+      var data = [];
+      for (var i = 0; i < health_data.length; i++) {
+        data.push([health_data[i].spneding, health_data[i].life]);
+      }*/
+      var pacific_data = [
+        { country: "Australia", spending: 9.1, life: 81.8 },
+        { country: "New Zealand", spending: 10.1, life: 81.0 },
+      ];
+      var europe_data = [
+        { country: "Australia", spending: 11.0, life: 80.7 },
+        { country: "Belgium", spending: 10.5, life: 80.3 },
+        { country: "Czech Republic", spending: 7.5, life: 77.7 },
+      ];
+      var us_data = [{ country: "United States", spending: 17.6, life: 78.7 }];
+
+      var pacific = [],
+        europe = [],
+        americas = [],
+        mideast = [],
+        asia = [],
+        us = [];
+      for (i = 0; i < pacific_data.length; i++) {
+        pacific.push([pacific_data[i].spending, pacific_data[i].life]);
+      }
+      for (i = 0; i < europe_data.length; i++) {
+        europe.push([europe_data[i].spending, europe_data[i].life]);
+      }
+      window.onload = function () {
+        Flotr.draw(
+          document.getElementById("chart"),
+          [
+            { data: pacific, label: "Pacific", points: { show: true } },
+            { data: europe, label: "Europe", points: { show: true } },
+            { data: americas, label: "Americas", points: { show: true } },
+            { data: mideast, label: "Middle East", points: { show: true } },
+            { data: asia, label: "Asia", points: { show: true } },
+            { data: us, label: "Unaited States", points: { show: true } },
+          ],
+          {
+            title: "Life Expectancy vs. Health-Care Spending",
+            subtitle: "(by country, 2010 OECD data)",
+            xaxis: {
+              min: 5,
+              max: 25,
+              tickDecimals: 0,
+              title: "Spending as Percntage of GDP",
+              tickFormatter: function (val) {
+                return val + "%";
+              },
+            },
+            yaxis: { min: 70, max: 85, tickDecimals: 0, title: "Years" },
+            legend: { position: "ne" },
+          }
+        );
+      };
+    </script>
+  </body>
+</html>
