@@ -1,0 +1,7 @@
+
+.chronoline-left:hover,
+.chronoline-right:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-color: #97aceb;
+}
