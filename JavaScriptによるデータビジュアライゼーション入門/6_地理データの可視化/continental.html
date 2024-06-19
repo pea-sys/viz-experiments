@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/continental.css" rel="stylesheet" type="text/css" />
+    <style>
+      #map {
+        font-size: 200px;
+        position: relative;
+      }
+      #map > [class*="map-"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #map > [data-age="44"] {
+        color: #2d9999;
+      }
+      #map > [data-age="43"] {
+        color: #2a9493;
+      }
+      #map > [data-age="42"] {
+        color: #278f8e;
+      }
+      #map-legend {
+        background: linear-gradient(to bottom, #004a4a 0%, #2d9999 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+      <span class="map-fr"></span>
+      <div id="map-legend"></div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        var countries = [
+          "ad",
+          "al",
+          "at",
+          "ba",
+          "be",
+          "bg",
+          "by",
+          "ch",
+          "cy",
+          "cz",
+          "de",
+          "dk",
+          "ee",
+          "es",
+          "fi",
+          "fo",
+          "fr",
+          "ge",
+          "gg",
+          "gr",
+          "hr",
+          "hu",
+          "ie",
+          "im",
+          "is",
+          "it",
+          "je",
+          "li",
+          "lt",
+          "lu",
+          "lv",
+          "mc",
+          "md",
+          "me",
+          "mk",
+          "mt",
+          "nl",
+          "no",
+          "pl",
+          "pt",
+          "ro",
+          "rs",
+          "ru",
+          "se",
+          "si",
+          "sk",
+          "sm",
+          "tr",
+          "ua",
+          "uk",
+          "va",
+        ];
+        var ages = [
+          { country: "al", age: 29.968 },
+          { country: "at", age: 41.768 },
+          { country: "ba", age: 39.921 },
+          { country: "be", age: 41.301 },
+          { country: "bg", age: 41.731 },
+          { country: "by", age: 99.999 },
+          { country: "ch", age: 99.999 },
+          { country: "cy", age: 99.999 },
+          { country: "cz", age: 99.999 },
+          { country: "de", age: 99.999 },
+          { country: "dk", age: 99.999 },
+          { country: "ee", age: 99.999 },
+          { country: "es", age: 99.999 },
+          { country: "fi", age: 99.999 },
+          { country: "fo", age: 99.999 },
+          { country: "ge", age: 99.999 },
+          { country: "gg", age: 99.999 },
+          { country: "gr", age: 99.999 },
+          { country: "hr", age: 99.999 },
+          { country: "hu", age: 99.999 },
+          { country: "ie", age: 99.999 },
+          { country: "im", age: 99.999 },
+          { country: "is", age: 99.999 },
+          { country: "it", age: 99.999 },
+          { country: "je", age: 99.999 },
+          { country: "li", age: 99.999 },
+          { country: "lt", age: 99.999 },
+          { country: "lu", age: 99.999 },
+          { country: "lv", age: 99.999 },
+          { country: "mc", age: 99.999 },
+          { country: "md", age: 99.999 },
+          { country: "me", age: 99.999 },
+          { country: "mk", age: 99.999 },
+          { country: "mt", age: 99.999 },
+          { country: "nl", age: 99.999 },
+          { country: "no", age: 99.999 },
+          { country: "pl", age: 99.999 },
+          { country: "pt", age: 99.999 },
+          { country: "ro", age: 99.999 },
+          { country: "rs", age: 99.999 },
+          { country: "ru", age: 99.999 },
+          { country: "se", age: 99.999 },
+          { country: "si", age: 99.999 },
+          { country: "sk", age: 99.999 },
+          { country: "sm", age: 99.999 },
+          { country: "tr", age: 99.999 },
+          { country: "ua", age: 99.999 },
+          { country: "uk", age: 99.999 },
+          { country: "va", age: 99.999 },
+        ];
+        var findCountryIndex = function (cc) {
+          for (var idx = 0; idx < ages.length; idx++) {
+            if (ages[idx].country === cc) {
+              return idx;
+            }
+          }
+          return -1;
+        };
+
+        var map = document.getElementById("map");
+        countries.forEach(function (cc) {
+          var idx = findCountryIndex(cc);
+          if (idx !== -1) {
+            var span = document.createElement("span");
+            span.className = "map-" + cc;
+            span.setAttribute("data-age", Math.round(ages[idx].age));
+            map.appendChild(span);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>
