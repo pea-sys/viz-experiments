@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+    <script>
+      var start, end, elapsed;
+      function measure(name, func) {
+        const start = performance.now();
+        func();
+        const end = performance.now();
+
+        const elapsed = end - start;
+        const elapsedStr = elapsed.toPrecision(3);
+        console.log(`${name}: ${elapsedStr}`);
+      }
+      var fib = function (n) {
+        if (n < 2) return n;
+        var f0 = 0,
+          f1 = 1,
+          f = 1;
+        for (var i = 2; i < n; i++) {
+          f0 = f1;
+          f1 = f;
+          f = f0 + f1;
+        }
+        return f;
+      };
+      var fibFunctional = function (n) {
+        return n < 2 ? n : fibFunctional(n - 1) + fibFunctional(n - 2);
+      };
+      var fibUnderscore = _(function (n) {
+        return n < 2 ? n : fibUnderscore(n - 1) + fibUnderscore(n - 2);
+      }).memoize();
+      measure("fib", () => {
+        fib(28);
+      });
+      measure("fibFunctional", () => {
+        fibFunctional(28);
+      });
+      measure("fibUnderscore", () => {
+        fibUnderscore(28);
+      });
+      var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(_(arr).first(), _(arr).first(3));
+      console.log(_(arr).last(), _(arr).last(3));
+      console.log(_(arr).initial(), _(arr).initial(3));
+      console.log(_(arr).rest(), _(arr).rest(3));
+      console.log(_(_(arr).first()).union(_(arr).rest()));
+      console.log(_(_(arr).first()).intersection(_(arr).rest()));
+      console.log(_(_(arr).first()).difference(_(arr).rest()));
+      console.log(_(arr).unique());
+      var naturals = [1, 2, 3, 4, 5];
+      var primes = [2, 3, 5, 7, 11];
+      console.log(_.zip(naturals, primes));
+      var raw = [0, 1, false, 2, "", 3, NaN, 4, , 5, null];
+      console.log(_(raw).compact());
+      raw = [1, 2, 3, [[4]], 5];
+      console.log(_(raw).flatten());
+      raw = [1, 2, 3, 4];
+      console.log(_(raw).without(2, 3));
+      console.log(_(primes).indexOf(5));
+      console.log(_(arr).indexOf(5, 4));
+      console.log(_(arr).lastIndexOf(5));
+      console.log(_.range(10));
+      var pizza = {
+        size: 10,
+        crust: "thin",
+        cheese: true,
+        topping: ["pepperoni", "sausage"],
+      };
+      console.log(_(pizza).keys());
+      console.log(_(pizza).values());
+      console.log(_(pizza).invert());
+      console.log(_(pizza).pick("size", "crust"));
+      console.log(_(pizza).omit("size", "crust"));
+
+      var national_leag = [
+        {
+          name: "Arizona Diamondbacks",
+          wins: 81,
+          losses: 81,
+          division: "west",
+        },
+        {
+          name: "Atlanta Braves",
+          wins: 94,
+          losses: 68,
+          division: "east",
+        },
+        {
+          name: "Chicago Cubs",
+          wins: 61,
+          losses: 101,
+          division: "central",
+        },
+      ];
+      _(national_leag).each(function (team) {
+        console.log(team.name);
+      });
+      _(national_leag).map(function (team) {
+        console.log(Math.round((100 * team.wins) / (team.wins + team.losses)));
+      });
+      console.log(
+        _(national_leag).reduce(function (count, team) {
+          return count + (team.wins > team.looses);
+        }, 0)
+      );
+      console.log(
+        _(national_leag).find(function (team) {
+          return team.wins > 90;
+        })
+      );
+      console.log(
+        _(national_leag).filter(function (team) {
+          return team.wins > 90;
+        })
+      );
+      console.log(
+        _(national_leag).reject(function (team) {
+          return team.wins > 90;
+        })
+      );
+      console.log(
+        _(national_leag).where(function (team) {
+          division: "east";
+        })
+      );
+      console.log(_(national_leag).pluck("name"));
+      console.log(
+        _(national_leag).every(function (team) {
+          return team.wins > 70;
+        })
+      );
+      console.log(
+        _(national_leag).any(function (team) {
+          return team.wins > 70;
+        })
+      );
+      console.log(
+        _(national_leag).max(function (team) {
+          return team.wins;
+        })
+      );
+    </script>
+  </body>
+</html>
